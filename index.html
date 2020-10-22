@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Quiz</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/stylsheet.css">
+</head>
+
+<body>
+    <div class="main-container">
+
+        <!--header containing high score timer -->
+        <header>
+            <div class="highscores">
+                <a href="#">View High Scores</a>
+            </div>
+            <div class="timer">
+                Timer: <span id="timer">0</span>
+            </div>
+        </header>
+
+        <!-- section intro info-->
+        <section id="title-intro" class="show">
+            <div class="center-content">
+                <div class="center-header">
+                    <h1>Coding Quiz Challenge</h1>
+                </div>
+                <div>
+                    <p>
+                        Welcome to the Javascripts coding challenege! You will have XX seconds to answer the questions.
+                        See
+                        how you stack up against the competition!
+                    </p>
+                </div>
+                <div>
+                    <button id="startButton">Start Quiz</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- section containing quiz questions/answers -->
+        <section id="quiz-content" class="hide">
+            <div class="center-content">
+                <div class="center-header">
+                    <h1>Quiz content</h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- section to display final score and submit initials to log -->
+        <section id="final-score" class="hide">
+            <div class="center-content">
+                <div class="center-header">
+                    <h2>Thanks for playing!</h2>
+                    <h3>Your final score is <span id="final-score">0</span></h3>
+                    <br>
+                    <label for="initials-area">Enter Initials</label>
+                    <input type="text" name="initials-area" maxlength="4" id="initials">
+                    <button id="submit-button" type="submit">Submit</button>
+                </div>
+            </div>
+        </section>
+
+        <br>
+
+        <footer>
+            &copy;2020 willp429
+        </footer>
+
+    </div>
+    <script src="./assets/js/javascript.js"></script>
+</body>
+
+</html>
