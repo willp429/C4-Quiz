@@ -5,7 +5,7 @@ var answerOptions = document.getElementById( "answer-options" )
 const questions = [
     {
         question: 'Inside which HTML element do we put the Javascript?',
-        potentialAnswers: ['<scripting', '<javascript>', '<js>', '<script>'],
+        potentialAnswers: ['<scripting>', '<javascript>', '<js>', '<script>'],
         correctAnswer: '<javascript>'
     },
     {
@@ -43,9 +43,13 @@ var message = "Time is up!";
 
 //global variables to reference
 var titleIntro = document.querySelector( "#title-intro" );
-var quizContent = document.querySelector( "#quiz-content" )
-var startBtn = document.querySelector( '#start-button' )
-var timeEl = document.querySelector( '#timer' )
+var quizContent = document.querySelector( "#quiz-content" );
+var startBtn = document.querySelector( '#start-button' );
+var timeEl = document.querySelector( '#timer' );
+var endGame = document.querySelector( '#endGame' );
+var finalScore = document.querySelector( '#final-score' );
+var entInitials = document.querySelector( '#initials' );
+var subBtn = document.querySelector( '#submit-button' );
 
 //questions for the quiz as an object
 function renderQuestions() {
@@ -54,7 +58,6 @@ function renderQuestions() {
     for ( var i = 0; i < questions[questionNumber].potentialAnswers.length; i++ ) {
         var btn = document.createElement( "button" );
         btn.innerText = questions[questionNumber].potentialAnswers[i];
-        btn.setAttribute( 'class', 'btn btn-success btn-block' );
         answerOptions.appendChild( btn );
         btn.addEventListener( "click", checkAnswers );
     }
@@ -68,7 +71,7 @@ function checkAnswers( event ) {
     var correctAnswer = questions[questionNumber].correctAnswer
 
     if ( userSelect === correctAnswer ) {
-        alert( "Correct!" );
+        alert( "Correct answer! + 1 point" );
         counter++;
     }
     else {
@@ -76,7 +79,7 @@ function checkAnswers( event ) {
         timeLeft -= 10
     }
     questionNumber++;
-    scoreKeeper.innerHTML = ( "Score: " + counter );
+    scoreKeeper.innerHTML = ( "Score " + counter );
     //clears the space for the next question and answers
     questionContent.innerHTML = "";
     answerOptions.innerHTML = "";
@@ -87,7 +90,6 @@ function checkAnswers( event ) {
     else {
         renderQuestions();
     }
-
 }
 
 //start button - starts quiz
@@ -115,13 +117,31 @@ function countdown() {
     }
 }
 
+
 function endQuiz() {
-    //what should happen when the quiz ends?
-    //stop the time
-    clearInterval( timeLeft );
+    //hide quiz content and display final score
     timeEl.textContent = message;
+    finalScore.setAttribute( "class", "show" );
+    quizContent.setAttribute( "class", "hide" );
+    //TODO stop the time
+    clearInterval( timerID );
+    timeLeft = 0;
     //display final score screen
+    endGame.textContent = counter;
+    console.log( endGame );
+
+    function saveScore() {
+        var entInitials = document.getElementById( 'initials' ).value;
+        localStorage.setItem( 'intials', JSON.stringify( entInitials ) );
+        localStorage.setItem( 'score', JSON.stringify( counter ) );
+
+        window.location.href = 'highScore.html';
+    }
+    subBtn.addEventListener( 'click', saveScore )
 }
+
+/* store intials, and add to high score function/html page */
+
 
 //highest score - compile initials and score
 startBtn.addEventListener( 'click', startQuiz )

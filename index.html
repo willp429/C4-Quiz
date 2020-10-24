@@ -10,11 +10,11 @@
 
 <body>
     <div class="main-container">
-
+        <button class="button" id="clear-btn">Clear Highscores</button>
         <!--header containing high score timer -->
         <header>
             <div class="highscores">
-                <a href="#">View High Scores</a>
+                <a href="./highscore.html">View High Scores</a>
             </div>
             <div class="timer">
                 <div>Timer: <span id="timer">0</span></div>
@@ -58,11 +58,11 @@
             <div class="center-content">
                 <div class="center-header">
                     <h2>Thanks for playing!</h2>
-                    <h3>Your final score is <span id="final-score">0</span></h3>
+                    <h3>Your final score is <span id="endGame">0</span></h3>
                     <br>
                     <label for="initials-area">Enter Initials</label>
                     <input type="text" name="initials-area" maxlength="4" id="initials">
-                    <button id="submit-button" type="submit">Submit</button>
+                    <button id="submit-button" type="submit"><a href=highscore.html>Submit</a></button>
                 </div>
             </div>
         </section>
