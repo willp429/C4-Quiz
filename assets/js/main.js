@@ -41,6 +41,10 @@ var timeLeft = questions.length * 15;
 var timerID;
 var message = "Time is up!";
 
+//score list
+var initialsId = 0;
+var btnIdEl = 0;
+
 //global variables to reference
 var titleIntro = document.querySelector( "#title-intro" );
 var quizContent = document.querySelector( "#quiz-content" );
@@ -50,9 +54,14 @@ var endGame = document.querySelector( '#endGame' );
 var finalScore = document.querySelector( '#final-score' );
 var entInitials = document.querySelector( '#initials' );
 var subBtn = document.querySelector( '#submit-button' );
+var sList = document.querySelector( '#scorelist' )
+var hScore = document.querySelector( '#highscore-display' );
 
-//questions for the quiz as an object
+
+///questions for the quiz as an object
 function renderQuestions() {
+    /*   if (questions.length === 0 || questionNumber >=maxQ)
+       */
     questionContent.innerHTML = questions[questionNumber].question;
 
     for ( var i = 0; i < questions[questionNumber].potentialAnswers.length; i++ ) {
@@ -77,6 +86,9 @@ function checkAnswers( event ) {
     else {
         alert( "Wrong answer!" )
         timeLeft -= 10
+        if ( timeLeft < 0 ) {
+            timeLeft = 0
+        }
     }
     questionNumber++;
     scoreKeeper.innerHTML = ( "Score " + counter );
@@ -123,25 +135,59 @@ function endQuiz() {
     timeEl.textContent = message;
     finalScore.setAttribute( "class", "show" );
     quizContent.setAttribute( "class", "hide" );
-    //TODO stop the time
     clearInterval( timerID );
-    timeLeft = 0;
-    //display final score screen
     endGame.textContent = counter;
-    console.log( endGame );
-
-    function saveScore() {
-        var entInitials = document.getElementById( 'initials' ).value;
-        localStorage.setItem( 'intials', JSON.stringify( entInitials ) );
-        localStorage.setItem( 'score', JSON.stringify( counter ) );
-
-        window.location.href = 'highScore.html';
-    }
-    subBtn.addEventListener( 'click', saveScore )
+    //timeLeft = 0;
+    //display final score screen
 }
 
-/* store intials, and add to high score function/html page */
+function saveScore() {
+    var initials = entInitials.value.trim();
+    if ( initials !== '' ) {
+        var highScores = JSON.parse( localStorage.getItem( 'highscores' ) ) || [];
+        var newScore = {
+            score: counter,
+            initials: initials
+        };
+        highScores.push( newScore );
+        window.localStorage.setItem( 'highscores', JSON.stringify( highScores ) );
+        window.location.href = 'highscore.html';
+    }
+    /* var fetchScore = localStorage.getItem( 'highscore' );
+    const scoreObj = {
+        score: fetchScore,
+        initials: entInitials.value,
+    };
 
+    finalScore.setAttribute( "class", "hide" );
+    hScore.setAttribute( "class", "show" );
+
+    var initials = JSON.parse( localStorage.getItem( 'initals' ) ) || [];
+
+
+    const maxScores = 10;
+
+    highScores.push( scoreObj )
+    highScores.sort( ( a, b ) => b.score - a.score )
+    highScores.splice( 10 )
+    localStorage.setItem( 'highscore', JSON.stringify( scoreObj ) );
+
+    var entInitials = document.getElementById( 'initials' ).value; */
+    /*   localStorage.setItem( 'intials', JSON.stringify( entInitials ) );
+      localStorage.setItem( 'score', JSON.stringify( counter ) ); */
+
+    /*var initials = JSON.parse( localStorage.getItem( 'intials' ) ) || [];
+     var scoreList = document.createElement( 'li' );
+     scoreList.className = 'user-initials';
+     scoreList.setAttribute( 'id', 'user-initials- ' + initialsId );
+     scoreList.setAttribute( 'value', initials );
+     scoreList.textContent = initials + '' + highScores;
+     sList.appendChild( scoreList );
+     initialsId++ */
+
+    /*     return window.location.assign( href = "./highscore.html" ) */
+}
 
 //highest score - compile initials and score
 startBtn.addEventListener( 'click', startQuiz )
+subBtn.addEventListener( 'click', saveScore )

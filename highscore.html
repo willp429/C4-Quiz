@@ -4,26 +4,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz High Scores</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/stylsheet.css">
+    <link rel="stylesheet" href="./assets/css/stylsheet.css">
+    <title>High Scores</title>
 </head>
 
 <body>
-    <div>
-        <div>
-            <section id="highscore-display">
-                <div class="row">
-                    <div class="center-content" id="posts">
-                        <h2>Highscores</h2>
-                        <ol id="highscores"></ol>
-                        <a href="./index.html"><button class="button" id="return-btn">Play Again</button></a>
-                        <button class="button" id="clear-btn">Clear Highscores</button>
-                    </div>
-            </section>
+    <!-- this is the section where the quiz content and questions will live -->
+    <section id="quiz-content" class="hide">
+        <div class="center-content">
+            <!-- title of the section for each question -->
+            <div class="center-header">
+                <h1>Quiz Content</h1>
+            </div>
+            <!-- blank div to dynamically insert questions into -->
+            <div class="row" id="questions-container">
+                <div class="questions" id="questions"></div>
+                <div class="potential-answers" id="potential-answers"></div>
+            </div>
+            <!-- blank div to dynamically provide the right/wrong feedback -->
+            <div class="row" id="feedback-container"></div>
         </div>
-        <footer>
-            &copy;2020 willp429
-        </footer>
-</body>
+    </section>
+
+    <section id="title-intro" class="hide">
+        <div class="center-content">
+            <div class="center-header">
+                <h1>Coding Quiz Challenge</h1>
+            </div>
+            <div>
+                <p>Welcome to the coding quiz! You'll have 75 seconds to complete the challenge and see how high you can
+                    score! Don't try to go too fast though, as you'll lose 10 seconds for a wrong answer. Good luck!</p>
+            </div>
+            <div>
+                <button class="button" id="start-button">Start Quiz</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- this is the section for the high score display -->
+    <section id="highscore-display" class="show">
+        <div class="center-content" id="posts">
+            <h2>High Scores</h2>
+            <div id="log-scores" class="logscores">
+                <ol class="scorelist" id="scorelist"></ol>
+            </div>
+            <div>
+                <a href="./index.html"><button class="button" id="return-btn">Play Again</button></a>
+                <button class="button" id="clear-btn">Clear Highscores</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- this is the footer of the page -->
+    <footer>
+        &copy;2020 by willp429
+    </footer>
+    <script src="./assets/js/highscore.js"></script>
 
 </html>
